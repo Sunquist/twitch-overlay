@@ -5,7 +5,7 @@ import useSWR from 'swr'
 
 
 export default function Home({ params }: { params: { nickname: string } }) {
-  const { data } = useSWR<Summary, Error>(`http://localhost:3000/api/summary/${params.nickname}`, fetcher, { refreshInterval: 30000 });
+  const { data } = useSWR<Summary, Error>(`https://twitch-overlay-f815yt8vr-sunquists-projects.vercel.app/api/summary/${params.nickname}`, fetcher, { refreshInterval: 30000 });
 
   return (
      <div style={{display: "flex", alignItems: "center", background: "rgba(0,0,0,0.3)", padding: 4, borderRadius: 40, width: 165}}>
