@@ -8,7 +8,7 @@ export default function Home({ params }: { params: { nickname: string } }) {
   const { data } = useSWR<Summary, Error>(`/api/summary/${params.nickname}`, fetcher, { refreshInterval: 30000 });
 
   return (
-     <div style={{display: "flex", alignItems: "center", background: "rgba(0,0,0,0.3)", padding: 4, borderRadius: 40, width: 165}}>
+     <div style={{display: "flex", alignItems: "center", background: "rgba(0,0,0,0.3)", padding: 4, borderRadius: 40, width: 160}}>
       {((data?.ranking || 0) < 1000)?
         <div style={{height: 36, display: "flex", alignItems: "center", backgroundColor: "rgb(232, 1, 40)", borderRadius: 40}}>
             <div style={{marginRight: 5, marginLeft: 5, fontSize: "1.2em"}}>#{data?.ranking} </div>
@@ -24,11 +24,11 @@ export default function Home({ params }: { params: { nickname: string } }) {
         </div>
       }
         <div style={{fontSize: "0.8em"}}>
-          <div style={{color: "white", marginLeft: 5, display: "flex", alignItems: "center",}}>
-            {data?.elo} ({(data?.eloDiff || 0) > 0 ? "+" : ""} {data?.eloDiff})
+          <div style={{color: data?.eloDiff ? "white" : "#ef5351", marginLeft: 5, display: "flex", alignItems: "center",}}>
+            {data?.elo} ({(data?.eloDiff || 0) > 0 ? "+" : ""}{data?.eloDiff})
           </div>
           <div style={{marginLeft: 15}}>
-            <span style={{color: "#63e6be"}}>{data?.wins}W</span> <span style={{color: "#efefef"}}>-</span> <span style={{color: "#ef5351"}}>{data?.losses}L</span>
+            <span style={{color: "white"}}>{data?.wins}W</span> <span style={{color: "#efefef"}}>-</span> <span style={{color: "#ef5351"}}>{data?.losses}L</span>
           </div>
         </div>
      </div>
